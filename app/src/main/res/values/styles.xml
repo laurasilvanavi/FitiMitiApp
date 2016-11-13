@@ -2,14 +2,12 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-      <!--  Theme.AppCompat.Light.DarkActionBar-->
+        <item name="colorPrimaryDark">@color/primary_dark_material_light2</item>
         <!-- Customize your theme here. -->
 
     </style>
 
     <style name="myTheme" parent="Theme.AppCompat.Light.NoActionBar" >
-        <item name="android:colorBackground">@color/background_material_light</item>
-        <item name="android:colorForeground">@color/foreground_material_light</item>
         <item name="android:textColorPrimary">@android:color/background_dark</item>
         <item name="android:navigationBarColor">@android:color/holo_blue_bright</item>
         <item name="colorPrimaryDark">@android:color/holo_green_dark</item>
