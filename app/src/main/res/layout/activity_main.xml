@@ -25,9 +25,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/buttonStart"
-        android:layout_marginBottom="48dp"
         android:onClick="startGame"
+        android:layout_above="@+id/buttonAdd"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="14dp" />
+
+    <Button
+        android:text="Pridėti žaidėją"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonAdd"
+        android:layout_marginBottom="48dp"
+        android:onClick="addPlayer"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
