@@ -3,6 +3,7 @@ package com.example.laurute.fitimitiapp.Database;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -21,7 +22,7 @@ public class GameDbHelper extends SQLiteOpenHelper {
     private static final String SQL_CREATE_PLAYERS =
             "CREATE TABLE " + GameContract.Player.TABLE_NAME + " (" +
                     GameContract.Player._ID + " INTEGER PRIMARY KEY," +
-                    GameContract.Player.COLUMN_NAME_NAME + TEXT_TYPE + " UNIQUE IGNORE)";
+                    GameContract.Player.COLUMN_NAME_NAME + TEXT_TYPE + " UNIQUE )";
 
     private static final String SQL_CREATE_TASKS =
             "CREATE TABLE " + GameContract.Task.TABLE_NAME + " (" +
@@ -67,14 +68,16 @@ public class GameDbHelper extends SQLiteOpenHelper {
         onUpgrade(db, oldVersion, newVersion);
     }
 
-    void addPlayer (String name) {
-        SQLiteDatabase db = this.getWritableDatabase();
+    public long addPlayer (String name) {
+        String message;
 
+        SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(GameContract.Player.COLUMN_NAME_NAME, name);
 
         // iterpia eilute ir grazina jos id
         long newRowId = db.insert(GameContract.Player.TABLE_NAME, null, values);
+        return newRowId;
     }
 
     public ArrayList<String> getAllPlayers() {
@@ -92,5 +95,12 @@ public class GameDbHelper extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return players;
+    }
+
+    public void deletePlayer(String name) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String selection = GameContract.Player.COLUMN_NAME_NAME + " LIKE ?";
+        String[] selectionArgs = { name };
+        db.delete(GameContract.Player.TABLE_NAME, selection, selectionArgs);
     }
 }
