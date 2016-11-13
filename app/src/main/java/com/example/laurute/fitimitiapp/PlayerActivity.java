@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
@@ -26,7 +27,8 @@ import java.util.List;
 public class PlayerActivity extends AppCompatActivity {
 
     private GameDbHelper db;
-    ListView lv;
+    //ListView lv;
+    GridView gv;
     ArrayAdapter<String> adapter;
     ArrayList<String> players;
 
@@ -36,7 +38,8 @@ public class PlayerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_player);
 
         db = new GameDbHelper(this);
-        lv = (ListView) findViewById(R.id.playerlist);
+        //lv = (ListView) findViewById(R.id.playerlist);
+        gv = (GridView) findViewById(R.id.gridview);
 
         //--------------BANDYMAI------
 
@@ -53,15 +56,16 @@ public class PlayerActivity extends AppCompatActivity {
             adapter = new ArrayAdapter<String>(
                     this, R.layout.player_info,
                     R.id.name,players);
-            lv.setAdapter(adapter);
+            //lv.setAdapter(adapter);
+            gv.setAdapter(adapter);
         }
 
-        lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+        gv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
                                            int position, long arg3) {
                // TextView text = (TextView) findViewById (R.id.test);
-                String name = lv.getItemAtPosition(position).toString();
+                String name = gv.getItemAtPosition(position).toString();
                // text.setText(name);
                 deletePlayer(position, name);
                 return true;
@@ -77,17 +81,22 @@ public class PlayerActivity extends AppCompatActivity {
     public void addPlayer(View view) {
         EditText ed1=(EditText)findViewById(R.id.playername);
         String name  = ed1.getText().toString();
+        long mark;
 
-        long mark = db.addPlayer(name);
-        if (mark != -1) {
-            Toast.makeText(getApplicationContext(), "Sėkmingai įrašyta.", Toast.LENGTH_LONG).show();
-            adapter.add(name);
-            adapter.notifyDataSetChanged();
-            adapter.notifyDataSetInvalidated();
-            ed1.setText("");
+        if(name.equals("")) {
+            Toast.makeText(getApplicationContext(), "Tuščio laukelio pridėti negalima!", Toast.LENGTH_LONG).show();
         }
         else {
-            Toast.makeText(getApplicationContext(), "Žaidėjas tokiu vardu jau yra!", Toast.LENGTH_LONG).show();
+            mark = db.addPlayer(name);
+            if (mark != -1) {
+                Toast.makeText(getApplicationContext(), "Sėkmingai įrašyta.", Toast.LENGTH_LONG).show();
+                adapter.add(name);
+                adapter.notifyDataSetChanged();
+                adapter.notifyDataSetInvalidated();
+                ed1.setText("");
+            } else {
+                Toast.makeText(getApplicationContext(), "Žaidėjas tokiu vardu jau yra!", Toast.LENGTH_LONG).show();
+            }
         }
     }
 
@@ -98,7 +107,7 @@ public class PlayerActivity extends AppCompatActivity {
         text.setText(t.get_type());
     }
 
-    private void displayListView() {
+   /* private void displayListView() {
         ArrayList<String> players = db.getAllPlayers();
 
         if (players != null) {
@@ -108,7 +117,7 @@ public class PlayerActivity extends AppCompatActivity {
                     R.id.name,players);
             listView.setAdapter(adapter);
         }
-    }
+    }*/
 
     protected void deletePlayer (int position, String name) {
         final int deletePosition = position;

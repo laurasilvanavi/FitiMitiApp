@@ -136,6 +136,11 @@ public class GameDbHelper extends SQLiteOpenHelper {
         db.delete(GameContract.Player.TABLE_NAME, selection, selectionArgs);
     }
 
+    public void deleteAllPlayers() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(GameContract.Player.TABLE_NAME, null,null);
+    }
+
     public int getTaskCount() {
         SQLiteDatabase db = this.getReadableDatabase();
         String countQuery = "SELECT  * FROM " + GameContract.Task.TABLE_NAME;
