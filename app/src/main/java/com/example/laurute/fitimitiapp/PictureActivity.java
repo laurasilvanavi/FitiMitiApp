@@ -76,5 +76,8 @@ public class PictureActivity extends AppCompatActivity {
         mCurrentPhotoPath = image.getAbsolutePath();
         return image;
     }
+    @Override
+    public void onBackPressed() {
+    }
 
 }
