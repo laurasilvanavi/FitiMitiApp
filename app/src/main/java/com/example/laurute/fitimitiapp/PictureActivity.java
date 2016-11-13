@@ -68,7 +68,6 @@ public class PictureActivity extends AppCompatActivity {
         File storageDir = Environment.getExternalStoragePublicDirectory("FitiMitiApp");
         if(!storageDir.exists()){ //jei nera tokio aplanko, tai sukuriam
             storageDir.mkdir();
-            Toast.makeText(getApplicationContext(), "Nebuvo, tad sukuriam", Toast.LENGTH_LONG).show();
          }
 
         File image = File.createTempFile(imageFileName, ".jpg", storageDir);
@@ -76,5 +75,4 @@ public class PictureActivity extends AppCompatActivity {
         mCurrentPhotoPath = image.getAbsolutePath();
         return image;
     }
-
 }
