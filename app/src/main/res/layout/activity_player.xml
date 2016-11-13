@@ -10,20 +10,37 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.laurute.fitimitiapp.PlayerActivity">
 
+    <TextView
+        android:text="Įveskite žaidėjo vardą"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/playername"
+        android:layout_alignTop="@+id/button"
+        android:layout_alignBottom="@+id/button"
+        android:layout_toStartOf="@+id/button" />
+
     <Button
         android:text="Pridėti"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:id="@+id/button"
+        android:layout_marginEnd="12dp"
         android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="22dp" />
+        android:layout_alignParentEnd="true" />
 
-    <TextView
-        android:text="TextView"
+    <Button
+        android:text="Žaisti"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView"
-        android:layout_alignTop="@+id/button" />
+        android:id="@+id/playbutton"
+        android:onClick="playGame"
+        android:layout_below="@+id/playername"
+        android:layout_toEndOf="@+id/playername" />
+
+    <ListView android:id="@+id/playerlist"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/playbutton"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>
