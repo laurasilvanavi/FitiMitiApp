@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".PictureActivity" />
-        <activity android:name=".GameActivity"></activity>
+        <activity android:name=".PlayerActivity"></activity>
     </application>
 
 </manifest>
