@@ -12,24 +12,22 @@
     tools:context="com.example.laurute.fitimitiapp.MainActivity">
 
 
-
-    <Button
-        android:text="Pradėti"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/buttonStart"
-        android:layout_marginBottom="40dp"
-        android:layout_marginTop="40dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:onClick="startGame"/>
-
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:srcCompat="@drawable/logo"
+        app:srcCompat="@mipmap/ic_launcher"
         android:id="@+id/imageView"
         android:layout_alignParentStart="true"
         android:layout_above="@+id/buttonStart"/>
+
+    <Button
+        android:text="Pradėti"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonStart"
+        android:layout_marginBottom="48dp"
+        android:onClick="startGame"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
