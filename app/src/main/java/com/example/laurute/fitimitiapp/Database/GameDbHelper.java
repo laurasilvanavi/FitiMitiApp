@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.example.laurute.fitimitiapp.Object.Task;
+
 import java.util.ArrayList;
 
 /**
@@ -80,6 +82,36 @@ public class GameDbHelper extends SQLiteOpenHelper {
         return newRowId;
     }
 
+    public long addTask (String description, String type, boolean partner) {
+        String message;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(GameContract.Task.COLUMN_NAME_DESCRIPTION, description);
+        values.put(GameContract.Task.COLUMN_NAME_TYPE, type);
+        values.put(GameContract.Task.COLUMN_NAME_PARTNER, partner);
+
+        // iterpia eilute ir grazina jos id
+        long newRowId = db.insert(GameContract.Task.TABLE_NAME, null, values);
+        return newRowId;
+    }
+
+    public Task getTask(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(GameContract.Task.TABLE_NAME, new String[] { GameContract.Task._ID,
+                        GameContract.Task.COLUMN_NAME_DESCRIPTION, GameContract.Task.COLUMN_NAME_TYPE,
+                        GameContract.Task.COLUMN_NAME_PARTNER }, GameContract.Task._ID + "=?",
+                        new String[] { String.valueOf(id) }, null, null, null, null);
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        Task task = new Task(Integer.parseInt(cursor.getString(0)),
+                cursor.getString(1), cursor.getString(2), Boolean.parseBoolean(cursor.getString(3)));
+        // return contact
+        return task;
+    }
+
     public ArrayList<String> getAllPlayers() {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + GameContract.Player.TABLE_NAME, null);
@@ -102,5 +134,15 @@ public class GameDbHelper extends SQLiteOpenHelper {
         String selection = GameContract.Player.COLUMN_NAME_NAME + " LIKE ?";
         String[] selectionArgs = { name };
         db.delete(GameContract.Player.TABLE_NAME, selection, selectionArgs);
+    }
+
+    public int getTaskCount() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String countQuery = "SELECT  * FROM " + GameContract.Task.TABLE_NAME;
+        Cursor cursor = db.rawQuery(countQuery, null);
+        int count = cursor.getCount();
+        cursor.close();
+
+        return count;
     }
 }

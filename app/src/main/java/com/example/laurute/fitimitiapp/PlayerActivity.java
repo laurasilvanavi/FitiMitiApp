@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.laurute.fitimitiapp.Database.GameDbHelper;
+import com.example.laurute.fitimitiapp.Object.Task;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +37,15 @@ public class PlayerActivity extends AppCompatActivity {
 
         db = new GameDbHelper(this);
         lv = (ListView) findViewById(R.id.playerlist);
+
+        //--------------BANDYMAI------
+
+       /* db.addTask("Pakakoti po pakopa", "task0", false);
+        db.addTask("Padainuoti visu balsu 1 min bet kokią dainą", "task0", false);
+        db.addTask("Išriaugėti abėcėlę", "task0", false);*/
+
+
+        //----------------------------
 
         players = db.getAllPlayers();
 
@@ -74,10 +84,18 @@ public class PlayerActivity extends AppCompatActivity {
             adapter.add(name);
             adapter.notifyDataSetChanged();
             adapter.notifyDataSetInvalidated();
+            ed1.setText("");
         }
         else {
             Toast.makeText(getApplicationContext(), "Žaidėjas tokiu vardu jau yra!", Toast.LENGTH_LONG).show();
         }
+    }
+
+    public void findTask(View view) {
+        int skaicius = db.getTaskCount();
+        Task t = db.getTask(1);
+        TextView text = (TextView) findViewById (R.id.test);
+        text.setText(t.get_type());
     }
 
     private void displayListView() {
