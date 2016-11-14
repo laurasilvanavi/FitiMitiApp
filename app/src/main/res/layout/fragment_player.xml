@@ -6,10 +6,9 @@
     <TextView
         android:gravity="center"
         android:layout_centerInParent="true"
-        android:text="Jonas"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView3"
+        android:id="@+id/textViewPlayer"
         android:textSize="65sp"
         android:textColor="@android:color/black"/>
 </RelativeLayout>
