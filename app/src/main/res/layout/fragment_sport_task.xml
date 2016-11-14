@@ -32,7 +32,8 @@
             android:layout_width="160dp"
             android:layout_height="160dp"
             app:srcCompat="@drawable/cocktail"
-            android:id="@+id/buttonSportTaskDrink"/>
+            android:id="@+id/buttonSportTaskDrink"
+            android:onClick="chooseDrink"/>
 
     </LinearLayout>
 

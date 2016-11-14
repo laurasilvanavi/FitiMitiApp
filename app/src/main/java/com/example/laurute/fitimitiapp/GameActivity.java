@@ -1,8 +1,10 @@
 package com.example.laurute.fitimitiapp;
 
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 
 import com.example.laurute.fitimitiapp.Database.GameDbHelper;
 import com.example.laurute.fitimitiapp.Fragments.PhotoTaskFragment;
@@ -90,5 +92,10 @@ public class GameActivity extends AppCompatActivity implements WhatFragment.What
     {
         Random r = new Random();
         return r.nextInt(max - min + 1) + min;
+    }
+
+    public void chooseDrink(View view){
+        Intent intent = new Intent(GameActivity.this, DrinkActivity.class);
+        startActivity(intent);
     }
 }
