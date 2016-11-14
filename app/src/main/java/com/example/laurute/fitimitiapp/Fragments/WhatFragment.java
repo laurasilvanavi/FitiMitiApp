@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.laurute.fitimitiapp.R;
@@ -24,13 +23,12 @@ public class WhatFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_what, container, false);
-        //buttonWhat = (Button)view.findViewById(R.id.buttonWhat);
         textViewWhat = (TextView) view.findViewById(R.id.textViewWhat);
 
         textViewWhat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                whatListener.ShowWhat();
+                whatListener.showWhat();
 
             }
         });
@@ -40,7 +38,7 @@ public class WhatFragment extends Fragment {
 
     public interface WhatListener
     {
-        void ShowWhat();
+        void showWhat();
 
     }
 

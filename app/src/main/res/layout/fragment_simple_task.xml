@@ -7,7 +7,6 @@
     <TextView
         android:gravity="center"
         android:layout_centerInParent="true"
-        android:text="Padainuoti gražiausią dainą ever"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textViewSimpleTask"
