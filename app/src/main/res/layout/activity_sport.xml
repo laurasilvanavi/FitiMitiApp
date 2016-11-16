@@ -10,13 +10,17 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.laurute.fitimitiapp.SportActivity">
 
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textSport"
-        android:text="Sportas - sveikata"/>
+        android:id="@+id/prepar"
+        android:text="@string/sport"
+        android:textAlignment="center"
+        android:textSize="25dp"
+        android:layout_marginTop="35dp"/>
 
-    <TextView
+   <!-- <TextView
         android:id="@+id/zcoor"
         android:text="Z Coordinate: "
         android:layout_width="wrap_content"
@@ -43,6 +47,36 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/textSport"
         android:layout_marginTop="10dp"
+        android:layout_alignParentEnd="true" />-->
+
+    <TextView
+        android:id="@+id/squat"
+        android:text=""
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:layout_gravity="center_vertical"
+        android:textSize="60sp"
+        android:layout_marginTop="10dp"
         android:layout_alignParentEnd="true" />
+
+    <Button
+        android:text="Tęsti žaidimą"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonSport"
+        android:onClick="continGame"
+        android:visibility="invisible"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="67dp" />
+
+
+   <!-- <ListView android:id="@+id/speedlist"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="15dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/squat"/>-->
 
 </RelativeLayout>

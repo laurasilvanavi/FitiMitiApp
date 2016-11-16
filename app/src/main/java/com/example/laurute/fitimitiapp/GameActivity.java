@@ -18,9 +18,11 @@ import com.example.laurute.fitimitiapp.Object.Task;
 import java.util.Random;
 
 public class GameActivity extends AppCompatActivity implements WhatFragment.WhatListener, WhoFragment.WhoListener {
+    public final static String EXTRA_MESSAGE = "com.example.laurute.fitimitiapp.MESSAGE";
     private static final String TYPE0 = "task0";
     private static final String TYPE1 = "task1";
     private static final String TYPE2 = "task2";
+    private Task task;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +49,7 @@ public class GameActivity extends AppCompatActivity implements WhatFragment.What
         android.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         db = new GameDbHelper(this);
         int random = getRandom(db.getTaskCount(), 1);
-        Task task = db.getTask(random);
+        task = db.getTask(random);
         Bundle info = new Bundle();
         info.putString("TaskDescription", task.get_description());
         switch (task.get_type()){
@@ -105,7 +107,10 @@ public class GameActivity extends AppCompatActivity implements WhatFragment.What
     }
 
     public void chooseSport(View view) {
+        String str = task.get_description();
+        str = str.replaceAll("\\D+","");
         Intent intent = new Intent(this, SportActivity.class);
+        intent.putExtra(EXTRA_MESSAGE, str);
         startActivity(intent);
     }
 }
