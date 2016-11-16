@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">FitiMitiApp</string>
+    <string name="app_name">FitiMiti</string>
+    <string name="descrip">Pakratykite telefoną ir sužinosite, kiek gurkšnių turite išgerti!</string>
 </resources>

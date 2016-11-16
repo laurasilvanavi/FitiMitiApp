@@ -10,4 +10,33 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.laurute.fitimitiapp.DrinkActivity">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/directions"
+        android:text="@string/descrip"
+        android:textAlignment="center"
+        android:textSize="25dp"
+        android:layout_marginTop="35dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/number"
+        android:gravity="center"
+        android:layout_gravity="center_vertical"
+        android:textSize="60sp"
+        android:textColor="#ff6666"/>
+
+    <Button
+        android:text="Tęsti žaidimą"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonContinue"
+        android:onClick="continueGame"
+        android:visibility="invisible"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="67dp" />
+
 </RelativeLayout>

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteException;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -31,6 +32,8 @@ public class PlayerActivity extends AppCompatActivity {
     GridView gv;
     ArrayAdapter<String> adapter;
     ArrayList<String> players;
+    int countTask;
+    int countDrink;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,14 +41,27 @@ public class PlayerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_player);
 
         db = new GameDbHelper(this);
+
+        //------kai nera duomenu TASK ir DRINK lentelese, tai iraso defaultinius
+        countTask = db.getTaskCount();
+        countDrink = db.getDrinkCount();
+        if (countTask == 0) db.generateAllDefaultTasks();
+        if (countDrink == 0) db.generateAllDefaultDrinks();
+
+
         //lv = (ListView) findViewById(R.id.playerlist);
         gv = (GridView) findViewById(R.id.gridview);
+
 
         //--------------BANDYMAI------
 
        /* db.addTask("Pakakoti po pakopa", "task0", false);
         db.addTask("Padainuoti visu balsu 1 min bet kokią dainą", "task0", false);
-        db.addTask("Išriaugėti abėcėlę", "task0", false);*/
+        db.addTask("Išriaugėti abėcėlę", "task0", false);
+        db.addTask("Pašokti", "task0", false);
+        db.addTask("Apeiti aplink namą 3 kartus", "task0", false);
+        db.addTask("Padaryti 10 pritūpimų", "task2", false);
+        db.addTask("Nusifotografuoti su 2 blondinėmis", "task1", false);*/
 
 
         //----------------------------
@@ -71,11 +87,19 @@ public class PlayerActivity extends AppCompatActivity {
                 return true;
             }
         });
+       // this.deleteDatabase("Game.db");
     }
 
     public void playGame (View view) {
-        Intent intent = new Intent(this, GameActivity.class);
-        startActivity(intent);
+        ArrayList<String> playerList = db.getAllPlayers();
+        int count = playerList.size();
+        if (count > 0 ) {
+            Intent intent = new Intent(this, GameActivity.class);
+            startActivity(intent);
+        }
+        else {
+            Toast.makeText(getApplicationContext(), "Norėdami žaisti pridėkite nors vieną žaidėją!", Toast.LENGTH_LONG).show();
+        }
     }
 
     public void addPlayer(View view) {
@@ -100,12 +124,12 @@ public class PlayerActivity extends AppCompatActivity {
         }
     }
 
-    public void findTask(View view) {
+   /* public void findTask(View view) {
         int skaicius = db.getTaskCount();
         Task t = db.getTask(1);
         TextView text = (TextView) findViewById (R.id.test);
         text.setText(t.get_type());
-    }
+    }*/
 
    /* private void displayListView() {
         ArrayList<String> players = db.getAllPlayers();

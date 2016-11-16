@@ -25,7 +25,8 @@
             android:layout_height="160dp"
             app:srcCompat="@drawable/weightlifting"
             android:layout_alignTop="@+id/textViewSportTask"
-            android:id="@+id/buttonSportTaskDone" />
+            android:id="@+id/buttonSportTaskDone"
+            android:onClick="chooseSport" />
 
         <ImageButton
             android:background="@null"

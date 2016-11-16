@@ -98,4 +98,14 @@ public class GameActivity extends AppCompatActivity implements WhatFragment.What
         Intent intent = new Intent(GameActivity.this, DrinkActivity.class);
         startActivity(intent);
     }
+
+    public void choosePhoto(View view) {
+        Intent intent = new Intent(this, PictureActivity.class);
+        startActivity(intent);
+    }
+
+    public void chooseSport(View view) {
+        Intent intent = new Intent(this, SportActivity.class);
+        startActivity(intent);
+    }
 }

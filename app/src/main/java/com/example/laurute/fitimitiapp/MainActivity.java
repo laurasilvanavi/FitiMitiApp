@@ -13,13 +13,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    public void addPlayer (View view) {
+    public void startGame(View view) {
         Intent intent = new Intent(this, PlayerActivity.class);
         startActivity(intent);
     }
 
-    public void startGame(View view) {
+   /* public void startGame(View view) {
         Intent intent = new Intent(this, PictureActivity.class); //siunčiu 2 būdais - iš čia gavus per shared preferences idedu i extras arba kitam activityje pats pasiims is shared preferences
         startActivity(intent);
-    }
+    }*/
 }

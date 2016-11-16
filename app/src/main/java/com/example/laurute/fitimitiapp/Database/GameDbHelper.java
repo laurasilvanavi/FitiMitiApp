@@ -70,8 +70,7 @@ public class GameDbHelper extends SQLiteOpenHelper {
         onUpgrade(db, oldVersion, newVersion);
     }
 
-    public long addPlayer (String name) {
-        String message;
+    public long addPlayer(String name) {
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -82,8 +81,7 @@ public class GameDbHelper extends SQLiteOpenHelper {
         return newRowId;
     }
 
-    public long addTask (String description, String type, boolean partner) {
-        String message;
+    public long addTask(String description, String type, boolean partner) {
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -93,6 +91,17 @@ public class GameDbHelper extends SQLiteOpenHelper {
 
         // iterpia eilute ir grazina jos id
         long newRowId = db.insert(GameContract.Task.TABLE_NAME, null, values);
+        return newRowId;
+    }
+
+    public long addDrink(String description) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(GameContract.Drink.COLUMN_NAME_DESCRIPTION, description);
+
+        // iterpia eilute ir grazina jos id
+        long newRowId = db.insert(GameContract.Drink.TABLE_NAME, null, values);
         return newRowId;
     }
 
@@ -110,6 +119,37 @@ public class GameDbHelper extends SQLiteOpenHelper {
                 cursor.getString(1), cursor.getString(2), Boolean.parseBoolean(cursor.getString(3)));
         // return contact
         return task;
+    }
+
+    public String getDrink(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(GameContract.Drink.TABLE_NAME, new String[] { GameContract.Drink._ID,
+                        GameContract.Drink.COLUMN_NAME_DESCRIPTION}, GameContract.Drink._ID + "=?",
+                new String[] { String.valueOf(id) }, null, null, null, null);
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        String descrip = cursor.getString(1);
+
+        return descrip;
+    }
+
+    public ArrayList<String> getAllDrinks() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + GameContract.Drink.TABLE_NAME, null);
+        ArrayList<String> drinks = new ArrayList<String>();
+        String drink;
+        if (cursor.getCount() > 0) {
+            for (int i = 0; i < cursor.getCount(); i++) {
+                cursor.moveToNext();
+                drink = cursor.getString(1);
+                drinks.add(drink);
+            }
+        }
+        cursor.close();
+        db.close();
+        return drinks;
     }
 
     public ArrayList<String> getAllPlayers() {
@@ -141,6 +181,16 @@ public class GameDbHelper extends SQLiteOpenHelper {
         db.delete(GameContract.Player.TABLE_NAME, null,null);
     }
 
+    public void deleteAllTasks() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(GameContract.Task.TABLE_NAME, null,null);
+    }
+
+    public void deleteAllDrinks() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(GameContract.Drink.TABLE_NAME, null,null);
+    }
+
     public int getTaskCount() {
         SQLiteDatabase db = this.getReadableDatabase();
         String countQuery = "SELECT  * FROM " + GameContract.Task.TABLE_NAME;
@@ -149,5 +199,43 @@ public class GameDbHelper extends SQLiteOpenHelper {
         cursor.close();
 
         return count;
+    }
+
+    public int getDrinkCount() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String countQuery = "SELECT  * FROM " + GameContract.Drink.TABLE_NAME;
+        Cursor cursor = db.rawQuery(countQuery, null);
+        int count = cursor.getCount();
+        cursor.close();
+
+        return count;
+    }
+
+    public void generateAllDefaultTasks() {
+        addTask("Pakakoti po pakopa", "task0", false);
+        addTask("Padainuoti visu balsu 1 min bet kokią dainą", "task0", false);
+        addTask("Išriaugėti abėcėlę", "task0", false);
+        addTask("Pašokti pagal mėgstamiausią dainą", "task0", false);
+        addTask("Apeiti aplink namą 3 kartus", "task0", false);
+        addTask("Padaryti 10 pritūpimų", "task2", false);
+        addTask("Nusifotografuoti su 2 blondinėmis", "task1", false);
+        addTask("Nusifotografuoti su šuniu", "task1", false);
+        addTask("Nusifotografuoti su vaiku", "task1", false);
+        addTask("Padaryti 20 plačių pritūpimų", "task2", false);
+        addTask("Padaryti 15 slidininko pritūpimų", "task2", false);
+    }
+
+    public void generateAllDefaultDrinks() {
+        addDrink("Geria gimę lyginę dieną");
+        addDrink("Geria tie, kas turi bent vieną brolį");
+        addDrink("Geria besimokantys Vilniaus universitete");
+        addDrink("Visi paragauja kaimyno iš dešinės gėrimo");
+        addDrink("Geria visi");
+        addDrink("Geria vienišiai");
+        addDrink("Laikas išgerti kairiarankiams");
+        addDrink("Jei tavo varde yra raidė S, reiškia turi išgerti");
+        addDrink("Kas nori, tas išgeria");
+        addDrink("Vyrai geria iki dugno");
+        addDrink("Moterys geria 10 sekundžių");
     }
 }

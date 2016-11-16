@@ -25,7 +25,8 @@
             android:layout_height="160dp"
             app:srcCompat="@drawable/camera"
             android:layout_alignTop="@+id/textViewPhotoTask"
-            android:id="@+id/buttonPhotoTaskDone" />
+            android:id="@+id/buttonPhotoTaskDone"
+            android:onClick="choosePhoto"/>
 
         <ImageButton
             android:background="@null"
