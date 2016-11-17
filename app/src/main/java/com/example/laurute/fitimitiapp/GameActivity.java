@@ -40,8 +40,6 @@ public class GameActivity extends AppCompatActivity implements WhatFragment.What
         WhatFragment newFragment2 = new WhatFragment();
         fragmentTransaction.add(R.id.fragment_container2, newFragment2);
         fragmentTransaction.commit();
-
-
     }
     GameDbHelper db;
 
@@ -110,7 +108,10 @@ public class GameActivity extends AppCompatActivity implements WhatFragment.What
     }
 
     public void choosePhoto(View view) {
+        String str = task.get_description();
+        str = str.replaceAll("\\D+","");
         Intent intent = new Intent(this, PictureActivity.class);
+        intent.putExtra(EXTRA_MESSAGE, str);
         startActivity(intent);
     }
 
@@ -128,5 +129,17 @@ public class GameActivity extends AppCompatActivity implements WhatFragment.What
         Intent intent = new Intent(this, CrunchesActivity.class);
         intent.putExtra(EXTRA_MESSAGE, str);
         startActivity(intent);
+    }
+
+    public void simpleTaskDone(View view){
+        android.app.FragmentManager fragmentManager = getFragmentManager();
+        final android.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        WhoFragment newFragment = new WhoFragment();
+        fragmentTransaction.replace(R.id.fragment_container1, newFragment);
+
+        WhatFragment newFragment2 = new WhatFragment();
+        fragmentTransaction.replace(R.id.fragment_container2, newFragment2);
+        fragmentTransaction.commit();
     }
 }

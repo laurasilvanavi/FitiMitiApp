@@ -44,9 +44,8 @@ public class PictureActivity extends AppCompatActivity {
         setContentView(R.layout.activity_picture);
         imageView =(ImageView) findViewById(R.id.imageViewPhoto);
         textView=(TextView) findViewById(R.id.textViewRepeatPhotoTask);
-        //Intent intent = getIntent();
-        //String message = intent.getStringExtra(GameActivity.EXTRA_MESSAGE);
-        String message = "1";
+        Intent intent = getIntent();
+        String message = intent.getStringExtra(GameActivity.EXTRA_MESSAGE);
         try
         {
             int number = Integer.parseInt(message);
@@ -56,7 +55,11 @@ public class PictureActivity extends AppCompatActivity {
         {
             peopleCount = 1;
         }
-        dispatchTakePictureIntent();
+        try{
+        dispatchTakePictureIntent();}
+        catch (SecurityException ex) {
+            Toast.makeText(getApplicationContext(), "Jeigu norite tęsti žaidimą, turite leisti naudoti Jūsų kamerą.", Toast.LENGTH_LONG).show();
+        }
     }
 
     public void takeaPicture(View view) {
@@ -68,7 +71,7 @@ public class PictureActivity extends AppCompatActivity {
         }
          else{
 
-              Toast.makeText(getApplicationContext(), "Jeigu norite įvykdyti funkciją, turi leisti prieiti prie jūsų duomenų.", Toast.LENGTH_LONG).show();
+              Toast.makeText(getApplicationContext(), "Jeigu norite tęsti žaidimą, leiskite programėlei prieiti prie Jūsų duomenis.", Toast.LENGTH_LONG).show();
          }
     }
 
@@ -81,7 +84,7 @@ public class PictureActivity extends AppCompatActivity {
             try {
                 photoFile = createImageFile();
             } catch (IOException ex) {
-                Toast.makeText(getApplicationContext(), "Atsiprašome, bet įvyko klaida kuriant failą. Suteikite teises programėlei pasiekti ir naudoti Jūsų duomenis.", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Jeigu norite tęsti žaidimą, leiskite programėlei prieiti prie Jūsų duomenis.", Toast.LENGTH_LONG).show();
 
             }
             // sukurtas buvo failas, o dbr fotkinama

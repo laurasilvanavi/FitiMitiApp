@@ -220,7 +220,8 @@ public class GameDbHelper extends SQLiteOpenHelper {
         addTask("Padaryti 10 pritūpimų", "task2", false);
         addTask("Nusifotografuoti su 2 blondinėmis", "task1", false);
         addTask("Nusifotografuoti su šuniu", "task1", false);
-        addTask("Nusifotografuoti su vaiku", "task1", false);
+        addTask("Nusifotografuoti su 2 mamomis", "task1", false);
+        addTask("Nusifotografuoti su 5 geriausiais draugais", "task1", false);
         addTask("Padaryti 20 plačių pritūpimų", "task2", false);
         addTask("Padaryti 15 slidininko pritūpimų", "task2", false);
         addTask("Atlikti 20 atsilenkimų", "task3", false);

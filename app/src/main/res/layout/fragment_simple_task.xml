@@ -25,7 +25,8 @@
             android:layout_height="160dp"
             app:srcCompat="@drawable/checked"
             android:layout_alignTop="@+id/textViewSimpleTask"
-            android:id="@+id/buttonSimpleTaskDone" />
+            android:id="@+id/buttonSimpleTaskDone"
+            android:onClick="simpleTaskDone"/>
 
         <ImageButton
             android:background="@null"
