@@ -18,10 +18,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void startCrunches(View view) {
+   /* public void startCrunches(View view) {
         Intent intent = new Intent(this, CrunchesActivity.class);
         startActivity(intent);
-    }
+    }*/
 
    /* public void startGame(View view) {
         Intent intent = new Intent(this, PictureActivity.class); //siunčiu 2 būdais - iš čia gavus per shared preferences idedu i extras arba kitam activityje pats pasiims is shared preferences

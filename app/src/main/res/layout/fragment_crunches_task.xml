@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewCrunchesTask"
+        android:textSize="25sp"
+        android:textColor="@android:color/black"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/textViewCrunchesTask"
+        android:gravity="center">
+        <ImageButton
+            android:background="@null"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            app:srcCompat="@drawable/weightlifting"
+            android:layout_alignTop="@+id/textViewCrunchesTask"
+            android:id="@+id/buttonCrunchesTaskDone"
+            android:onClick="chooseCrunches" />
+
+        <ImageButton
+            android:background="@null"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            app:srcCompat="@drawable/cocktail"
+            android:id="@+id/buttonSportTaskDrink"
+            android:onClick="chooseDrink"/>
+
+    </LinearLayout>
+
+
+</RelativeLayout>
