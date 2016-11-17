@@ -4,6 +4,9 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.example.laurute.fitimitiapp.Database.GameDbHelper;
@@ -30,6 +33,10 @@ public class GameActivity extends AppCompatActivity implements WhatFragment.What
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+        // pridedam menu bar
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         android.app.FragmentManager fragmentManager = getFragmentManager();
         final android.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -96,6 +103,27 @@ public class GameActivity extends AppCompatActivity implements WhatFragment.What
 
         fragmentTransaction.replace(R.id.fragment_container1, playerFragment);
         fragmentTransaction.commit();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.action, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                return true;
+
+            case R.id.action_drink:
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+
+        }
     }
 
     private int getRandom(int max, int min)
