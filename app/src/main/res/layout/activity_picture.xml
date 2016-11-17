@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_picture"
     android:layout_width="match_parent"
@@ -10,13 +11,34 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.laurute.fitimitiapp.PictureActivity">
 
-    <Button
-        android:text="Fotografuoti"
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/question"
+        android:id="@+id/imageViewPhoto"
+        android:layout_below="@+id/textViewRepeatPhotoTask"
+        android:layout_above="@+id/buttonPicture"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="52dp"
-        android:id="@+id/buttonPicture"
-        android:layout_alignParentBottom="true"
+        android:id="@+id/textViewRepeatPhotoTask"
+        android:textSize="25sp"
+        android:textColor="@android:color/black"
+        android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:onClick="takeaPicture"/>
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="5dp"/>
+
+    <Button
+        android:text="Perfotografuoti"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonPicture"
+        android:onClick="takeaPicture"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"/>
 </RelativeLayout>
