@@ -68,7 +68,6 @@ public class CrunchesActivity extends AppCompatActivity implements SensorEventLi
     }
 
     public void skaiciuotiKartus(float sensorX, float sensorY, float sensorZ) {
-            tv.setText(Float.toString(sensorY));
             if (sensorY > 4.0 || sensorY < -4.0) {
                 sm.unregisterListener(this);
                 count += 0.5f;
@@ -77,7 +76,7 @@ public class CrunchesActivity extends AppCompatActivity implements SensorEventLi
                     @Override
                     public void run() {
                         if (count == 15) {
-                            mainButton.setText("Treniruotė baigta");
+                            mainButton.setText("Baigta");
                             tv.setText("");
                         }
                         else {
