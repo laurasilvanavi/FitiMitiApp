@@ -35,7 +35,8 @@
             android:name=".GameActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".DrinkActivity" />
-        <activity android:name=".SportActivity"></activity>
+        <activity android:name=".SportActivity" />
+        <activity android:name=".CrunchesActivity"></activity>
     </application>
 
 </manifest>
