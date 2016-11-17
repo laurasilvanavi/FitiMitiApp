@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.laurute.fitimitiapp.Database.GameDbHelper;
+import com.example.laurute.fitimitiapp.Fragments.CrunchesTaskFragment;
 import com.example.laurute.fitimitiapp.Fragments.PhotoTaskFragment;
 import com.example.laurute.fitimitiapp.Fragments.PlayerFragment;
 import com.example.laurute.fitimitiapp.Fragments.SimpleTaskFragment;
@@ -22,6 +23,7 @@ public class GameActivity extends AppCompatActivity implements WhatFragment.What
     private static final String TYPE0 = "task0";
     private static final String TYPE1 = "task1";
     private static final String TYPE2 = "task2";
+    private static final String TYPE3 = "task3";
     private Task task;
 
     @Override
@@ -63,6 +65,12 @@ public class GameActivity extends AppCompatActivity implements WhatFragment.What
                 SportTaskFragment sportTaskFragment = new SportTaskFragment();
                 sportTaskFragment.setArguments(info);
                 fragmentTransaction.replace(R.id.fragment_container2, sportTaskFragment);
+                fragmentTransaction.commit();
+                break;
+            case TYPE3:
+                CrunchesTaskFragment crunchesTaskFragment = new CrunchesTaskFragment();
+                crunchesTaskFragment.setArguments(info);
+                fragmentTransaction.replace(R.id.fragment_container2, crunchesTaskFragment);
                 fragmentTransaction.commit();
                 break;
             default:
@@ -110,6 +118,14 @@ public class GameActivity extends AppCompatActivity implements WhatFragment.What
         String str = task.get_description();
         str = str.replaceAll("\\D+","");
         Intent intent = new Intent(this, SportActivity.class);
+        intent.putExtra(EXTRA_MESSAGE, str);
+        startActivity(intent);
+    }
+
+    public void chooseCrunches(View view) {
+        String str = task.get_description();
+        str = str.replaceAll("\\D+","");
+        Intent intent = new Intent(this, CrunchesActivity.class);
         intent.putExtra(EXTRA_MESSAGE, str);
         startActivity(intent);
     }
