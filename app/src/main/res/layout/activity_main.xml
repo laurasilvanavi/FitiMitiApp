@@ -6,10 +6,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.laurute.fitimitiapp.MainActivity">
+    tools:context="com.example.laurute.fitimitiapp.MainActivity"
+    android:paddingEnd="@dimen/activity_vertical_margin"
+    android:paddingStart="@dimen/activity_vertical_margin">
 
 
     <ImageView
@@ -22,22 +23,26 @@
 
     <Button
         android:text="Pradėti"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/buttonStart"
         android:onClick="startGame"
+        android:background="@drawable/button_style"
+        android:layout_marginBottom="@dimen/button_margin_bottom"
+        android:elevation="0dp"
+        android:textColor="#ffffff"
+        android:textSize="@dimen/button_text_size"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="67dp" />
+        android:layout_centerHorizontal="true" />
 
-   <!-- <Button
-        android:text="Atsilenkimai"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/buttonStartCrunches"
-        android:onClick="startCrunches"
-        android:layout_marginBottom="15dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />-->
+    <!-- <Button
+         android:text="Atsilenkimai"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:id="@+id/buttonStartCrunches"
+         android:onClick="startCrunches"
+         android:layout_marginBottom="15dp"
+         android:layout_alignParentBottom="true"
+         android:layout_centerHorizontal="true" />-->
 
 </RelativeLayout>

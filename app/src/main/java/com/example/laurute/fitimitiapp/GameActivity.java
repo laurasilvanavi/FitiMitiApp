@@ -2,12 +2,15 @@ package com.example.laurute.fitimitiapp;
 
 import android.app.FragmentTransaction;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.laurute.fitimitiapp.Database.GameDbHelper;
 import com.example.laurute.fitimitiapp.Fragments.CrunchesTaskFragment;
@@ -28,6 +31,10 @@ public class GameActivity extends AppCompatActivity implements WhatFragment.What
     private static final String TYPE2 = "task2";
     private static final String TYPE3 = "task3";
     private Task task;
+    private String player = "";
+    private String companion = "";
+    private int randomPlayer = -1;
+    private int randomCompanion = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +44,12 @@ public class GameActivity extends AppCompatActivity implements WhatFragment.What
         // pridedam menu bar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        toolbar.setAlpha(0.5f);
+        toolbar.setBackground(new ColorDrawable(Color.TRANSPARENT));
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+      //  getSupportActionBar().setDisplayHomeAsUpEnabled(true);     uzdeda grizimo mygtuka
+
 
         android.app.FragmentManager fragmentManager = getFragmentManager();
         final android.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -57,6 +70,7 @@ public class GameActivity extends AppCompatActivity implements WhatFragment.What
         db = new GameDbHelper(this);
         int random = getRandom(db.getTaskCount(), 1);
         task = db.getTask(random);
+        if (task.is_partner()) findCompanion();
         Bundle info = new Bundle();
         info.putString("TaskDescription", task.get_description());
         switch (task.get_type()){
@@ -93,14 +107,42 @@ public class GameActivity extends AppCompatActivity implements WhatFragment.What
         PlayerFragment playerFragment = new PlayerFragment();
 
         db = new GameDbHelper(this);
-        int random = getRandom(db.getAllPlayers().size()-1, 0);
-        String player = db.getAllPlayers().get(random).toString();
+        randomPlayer = getRandom(db.getAllPlayers().size()-1, 0);
+        if (randomCompanion == randomPlayer) {
+            if (randomPlayer > 0) {
+                randomPlayer--;
+            } else {
+                randomPlayer++;
+            }
+        }
+        player = db.getAllPlayers().get(randomPlayer).toString();
+
         Bundle info = new Bundle();
         info.putString("Player", player);
+        info.putString("Companion", companion);
         playerFragment.setArguments(info);
 
         fragmentTransaction.replace(R.id.fragment_container1, playerFragment);
         fragmentTransaction.commit();
+    }
+
+    public void findCompanion() {
+        String comp;
+        randomCompanion = getRandom(db.getAllPlayers().size()-1, 0);
+        if (randomCompanion == randomPlayer) {
+            if (randomCompanion > 0) {
+                randomCompanion--;
+            } else {
+                randomCompanion++;
+            }
+        }
+        comp = db.getAllPlayers().get(randomCompanion).toString();
+        companion = comp;
+        if (player != "") {
+            TextView tv = (TextView)findViewById(R.id.textViewCompanion);
+            tv.setText("Partneris: "+comp);
+            tv.setBackgroundResource(R.drawable.dotted_border);
+        }
     }
 
     @Override
@@ -112,11 +154,25 @@ public class GameActivity extends AppCompatActivity implements WhatFragment.What
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_settings:
+            case R.id.action_menu:
                 return true;
 
-            case R.id.action_drink:
+            case R.id.action_player:
+                finish();
                 return true;
+
+            case R.id.action_task:
+                Intent intent = new Intent(GameActivity.this, TaskActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.action_finish:
+                this.finishAffinity();
+                Intent homeIntent = new Intent(Intent.ACTION_MAIN);
+                homeIntent.addCategory(Intent.CATEGORY_HOME);
+                homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(homeIntent);
+               // android.os.Process.killProcess(android.os.Process.myPid());
 
             default:
                 return super.onOptionsItemSelected(item);
@@ -162,6 +218,11 @@ public class GameActivity extends AppCompatActivity implements WhatFragment.What
     public void simpleTaskDone(View view){
         android.app.FragmentManager fragmentManager = getFragmentManager();
         final android.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        player = "";
+        companion = "";
+        randomPlayer = -1;
+        randomCompanion = -1;
 
         WhoFragment newFragment = new WhoFragment();
         fragmentTransaction.replace(R.id.fragment_container1, newFragment);

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="primary_dark_material_light2">#248c5c</color>
+    <color name="game_text_color_after">#213026</color>
     <string name="s_what">KĄ?</string>
     <string name="s_who">KAS?</string>
 </resources>

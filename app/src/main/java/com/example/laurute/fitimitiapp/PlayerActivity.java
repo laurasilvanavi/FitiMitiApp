@@ -55,6 +55,9 @@ public class PlayerActivity extends AppCompatActivity {
 
         //--------------BANDYMAI------
 
+       /* db.addTask("Nusifotografuoti su 2 mamomis", "task1", false);
+        db.addTask("Nusifotografuoti su 3 geriausiais draugais", "task1", false);
+
        /* db.addTask("Pakakoti po pakopa", "task0", false);
         db.addTask("Padainuoti visu balsu 1 min bet kokią dainą", "task0", false);
         db.addTask("Išriaugėti abėcėlę", "task0", false);
@@ -149,7 +152,7 @@ public class PlayerActivity extends AppCompatActivity {
 
         AlertDialog.Builder alert = new AlertDialog.Builder(PlayerActivity.this);
 
-        alert.setTitle("Įspėjimas");
+        alert.setTitle("Dėmesio!");
         alert.setMessage("Ar tikrai norite ištrinti šį žaidėją?");
         alert.setPositiveButton("Taip", new DialogInterface.OnClickListener() {
             @Override

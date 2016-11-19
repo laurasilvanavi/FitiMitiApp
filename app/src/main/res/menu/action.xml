@@ -2,13 +2,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/action_drink"
-        android:icon="@drawable/cocktail"
-        android:title="drink"
-        app:showAsAction="ifRoom"/>
+        android:id="@+id/action_menu"
+        android:icon="@drawable/menu"
+        android:title="menu"
+        app:showAsAction="ifRoom">
+        <menu>
+            <item android:id="@+id/action_player"
+                android:title="@string/action_player" />
+            <item android:id="@+id/action_task"
+                android:title="@string/action_task" />
+            <item android:id="@+id/action_finish"
+                android:title="@string/action_finish" />
+        </menu>
+    </item>
 
-    <item android:id="@+id/action_settings"
-        android:title="Baigti"
-        app:showAsAction="never"/>
 
 </menu>

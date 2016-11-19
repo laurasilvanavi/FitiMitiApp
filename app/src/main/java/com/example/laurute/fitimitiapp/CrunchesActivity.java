@@ -46,25 +46,22 @@ public class CrunchesActivity extends AppCompatActivity implements SensorEventLi
         }
 
         startButton = (Button)findViewById(R.id.buttonCrunch);
+        startButton.setVisibility(View.INVISIBLE);
+
         infoButton = (Button)findViewById(R.id.button11);
 
         tv = (TextView)findViewById(R.id.crunch);
         tv.setText(Integer.toString((int)count)+"/"+crunchesToDo);
+
+        doCrunches();
     }
 
-    public void startButtonClick(View v) {
-        if (startButton.getText().toString().contentEquals("Pradėti")) {
-            startButton.setText("Tęsti žaidimą");
-            startButton.setVisibility(View.INVISIBLE);
-            doCrunches();
-        }
-        else if (startButton.getText().toString().contentEquals("Tęsti žaidimą")) {
-            unregister();
-            startButton.setVisibility(View.INVISIBLE);
-            Intent intent = new Intent(this, GameActivity.class);
-            startActivity(intent);
-            finish();
-        }
+    public void continueGameFromCrunches(View view){
+        unregister();
+        startButton.setVisibility(View.INVISIBLE);
+        Intent intent = new Intent(this, GameActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     private void doCrunches() {
@@ -91,7 +88,7 @@ public class CrunchesActivity extends AppCompatActivity implements SensorEventLi
     }
 
     public void countRepeat(float sensorX, float sensorY, float sensorZ) {
-            if (sensorY > 3.0 || sensorY < -3.0) {
+            if (sensorY > 2.0 || sensorY < -2.0) {
                 sm.unregisterListener(this);
                 count += 0.5f;
                 final Handler handler = new Handler();

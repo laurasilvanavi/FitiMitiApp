@@ -71,7 +71,7 @@ public class PictureActivity extends AppCompatActivity {
         }
          else{
 
-              Toast.makeText(getApplicationContext(), "Jeigu norite tęsti žaidimą, leiskite programėlei prieiti prie Jūsų duomenis.", Toast.LENGTH_LONG).show();
+              Toast.makeText(getApplicationContext(), "Jeigu norite tęsti žaidimą, leiskite programėlei prieiti prie Jūsų duomenų.", Toast.LENGTH_LONG).show();
          }
     }
 
@@ -84,7 +84,7 @@ public class PictureActivity extends AppCompatActivity {
             try {
                 photoFile = createImageFile();
             } catch (IOException ex) {
-                Toast.makeText(getApplicationContext(), "Jeigu norite tęsti žaidimą, leiskite programėlei prieiti prie Jūsų duomenis.", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Jeigu norite tęsti žaidimą, leiskite programėlei prieiti prie Jūsų duomenų.", Toast.LENGTH_LONG).show();
 
             }
             // sukurtas buvo failas, o dbr fotkinama

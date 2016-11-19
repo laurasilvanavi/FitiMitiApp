@@ -23,7 +23,7 @@
 
     <GridView
         android:id="@+id/gridview"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="400dp"
         android:columnWidth="135dp"
         android:numColumns="auto_fit"
@@ -32,12 +32,16 @@
         android:stretchMode="columnWidth"
         android:gravity="center"
         android:layout_below="@+id/button"
-        android:layout_alignParentStart="true" />
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="20dp"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/playbutton" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/playername"
+        android:maxLength="12"
         android:inputType="textCapSentences"
         android:hint="Įveskite žaidėjo vardą"
         tools:layout_width="match_parent"
@@ -60,10 +64,14 @@
 
     <Button
         android:text="Žaisti"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/playbutton"
         android:onClick="playGame"
+        android:background="@drawable/button_style"
+        android:textColor="#ffffff"
+        android:textSize="@dimen/button_text_size"
+        android:layout_marginBottom="15dp"
         android:layout_centerInParent="false"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />

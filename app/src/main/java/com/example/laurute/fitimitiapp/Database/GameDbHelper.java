@@ -115,8 +115,16 @@ public class GameDbHelper extends SQLiteOpenHelper {
         if (cursor != null)
             cursor.moveToFirst();
 
+        String partner = cursor.getString(3);
+        boolean isPartner;
+        if (Integer.parseInt(partner) == 1) {
+            isPartner = true;
+        } else {
+            isPartner = false;
+        }
         Task task = new Task(Integer.parseInt(cursor.getString(0)),
-                cursor.getString(1), cursor.getString(2), Boolean.parseBoolean(cursor.getString(3)));
+                cursor.getString(1), cursor.getString(2), isPartner);
+
         // return contact
         return task;
     }

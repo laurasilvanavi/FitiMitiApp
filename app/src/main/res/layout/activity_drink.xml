@@ -10,14 +10,27 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.laurute.fitimitiapp.DrinkActivity">
 
-    <TextView
+    <!--<TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/directions"
         android:text="@string/descrip"
         android:textAlignment="center"
         android:textSize="25dp"
-        android:layout_marginTop="35dp"/>
+        android:layout_marginTop="35dp"/>-->
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/descrip"
+        android:id="@+id/directions"
+        android:layout_marginTop="29dp"
+        android:textColor="@color/primary_dark_material_light2"
+        android:background="@color/wallet_bright_foreground_holo_dark"
+        android:textSize="20sp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="match_parent"
@@ -25,18 +38,23 @@
         android:id="@+id/number"
         android:gravity="center"
         android:layout_gravity="center_vertical"
-        android:textSize="60sp"
-        android:textColor="#ff6666"/>
+        android:textSize="100sp"
+        android:textColor="#ff6666"
+        android:layout_below="@+id/directions"
+        android:layout_above="@+id/buttonContinue" />
 
     <Button
         android:text="Tęsti žaidimą"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/buttonContinue"
         android:onClick="continueGame"
         android:visibility="invisible"
+        android:background="@drawable/button_style"
+        android:textColor="#ffffff"
+        android:textSize="@dimen/button_text_size"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="67dp" />
+        android:layout_marginBottom="@dimen/button_margin_bottom" />
 
 </RelativeLayout>
