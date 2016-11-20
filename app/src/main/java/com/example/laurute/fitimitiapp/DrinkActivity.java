@@ -101,4 +101,7 @@ public class DrinkActivity extends AppCompatActivity implements SensorEventListe
         super.onResume();
         senManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
     }
+    @Override
+    public void onBackPressed() {
+    }
 }

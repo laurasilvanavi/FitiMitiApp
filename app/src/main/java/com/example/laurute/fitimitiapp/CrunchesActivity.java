@@ -115,5 +115,8 @@ public class CrunchesActivity extends AppCompatActivity implements SensorEventLi
         float sensorZ = se.values[2];
         countRepeat(sensorX, sensorY, sensorZ);
     }
+    @Override
+    public void onBackPressed() {
+    }
 
 }

@@ -1,6 +1,7 @@
 package com.example.laurute.fitimitiapp;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
@@ -13,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.SparseArray;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,17 +37,18 @@ public class PictureActivity extends AppCompatActivity {
     String mCurrentPhotoPath;
     Uri photoURI;
     ImageView imageView;
-    TextView textView;
     int peopleCount;
+    Button buttonInformation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_picture);
         imageView =(ImageView) findViewById(R.id.imageViewPhoto);
-        textView=(TextView) findViewById(R.id.textViewRepeatPhotoTask);
         Intent intent = getIntent();
         String message = intent.getStringExtra(GameActivity.EXTRA_MESSAGE);
+        buttonInformation = (Button) findViewById(R.id.buttonInformation);
+
         try
         {
             int number = Integer.parseInt(message);
@@ -53,26 +56,38 @@ public class PictureActivity extends AppCompatActivity {
         }
         catch (NumberFormatException e)
         {
-            peopleCount = 1;
+            peopleCount = 0;
         }
-        try{
-        dispatchTakePictureIntent();}
-        catch (SecurityException ex) {
-            Toast.makeText(getApplicationContext(), "Jeigu norite tęsti žaidimą, turite leisti naudoti Jūsų kamerą.", Toast.LENGTH_LONG).show();
-        }
+        takeaPicture(findViewById(R.id.activity_picture));
+    }
+
+    private boolean checkPermission(String permission)
+    {
+        int res = getApplicationContext().checkCallingOrSelfPermission(permission);
+        return (res == PackageManager.PERMISSION_GRANTED);
     }
 
     public void takeaPicture(View view) {
-        String state;
-        state = Environment.getExternalStorageState();
 
-        if(Environment.MEDIA_MOUNTED.equals(state)) { //kitoks tikrinimas ar suteiktos teises
-            dispatchTakePictureIntent();
+        PackageManager pm = getApplicationContext().getPackageManager();
+        //tikrinama ar suteikti leidimai
+        if (pm.hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
+            if(checkPermission("android.permission.CAMERA"))
+            {
+                if (checkPermission("android.permission.WRITE_EXTERNAL_STORAGE")==true && checkPermission("android.permission.READ_EXTERNAL_STORAGE")==true)
+                {
+                    dispatchTakePictureIntent();
+                }
+                else{
+                    buttonInformation.setText("Pamiršote suteikti leidimą naudoti Jūsų nuotraukų galerijos duomenis!");
+                    Toast.makeText(getApplicationContext(), "Jeigu norite tęsti žaidimą, turite leisti išsaugoti ir analizuoti Jūsų nuotraukas.", Toast.LENGTH_LONG).show(); //veikia
+                }
+            }
+            else {
+                buttonInformation.setText("Pamiršote suteikti leidimą naudoti Jūsų kamerą!");
+                Toast.makeText(getApplicationContext(), "Jeigu norite tęsti žaidimą, turite leisti naudoti Jūsų kamerą.", Toast.LENGTH_LONG).show();
+            }
         }
-         else{
-
-              Toast.makeText(getApplicationContext(), "Jeigu norite tęsti žaidimą, leiskite programėlei prieiti prie Jūsų duomenų.", Toast.LENGTH_LONG).show();
-         }
     }
 
     private void dispatchTakePictureIntent() {
@@ -84,7 +99,7 @@ public class PictureActivity extends AppCompatActivity {
             try {
                 photoFile = createImageFile();
             } catch (IOException ex) {
-                Toast.makeText(getApplicationContext(), "Jeigu norite tęsti žaidimą, leiskite programėlei prieiti prie Jūsų duomenų.", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Atsiprašome, bet įvyko klaida kuriant failą", Toast.LENGTH_LONG).show();
 
             }
             // sukurtas buvo failas, o dbr fotkinama
@@ -95,22 +110,23 @@ public class PictureActivity extends AppCompatActivity {
             }
         }
    }
-    protected void onActivityResult(int requestCode, int resultCode,
-                                    Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_TAKE_PHOTO) {
             if (resultCode == RESULT_OK) {
                 int facesCount = detectFaces();
-                if (facesCount>=peopleCount){
+                if (facesCount>peopleCount){
                     Intent intent = new Intent(PictureActivity.this, GameActivity.class);
                     startActivity(intent);
                     finish();
                 }
                 else{
-                    textView.setText("Net pirmokas suskaičiuotų, jog per mažai žmonių nuotraukoje!");
+                    buttonInformation.setText("Net pirmokas suskaičiuotų, jog per mažai žmonių nuotraukoje!");
                 }
             }
             else{
-                textView.setText("Kur bėgate? Dar nenusifotografavote!");
+                buttonInformation.setText("Kur bėgate? Dar nenusifotografavote!");
+                File file = new File(mCurrentPhotoPath);
+                file.delete();
             }
         }
     }
@@ -176,6 +192,5 @@ public class PictureActivity extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-        //moveTaskToBack(true);
     }
 }

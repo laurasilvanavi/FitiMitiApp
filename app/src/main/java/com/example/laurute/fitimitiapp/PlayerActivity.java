@@ -96,12 +96,12 @@ public class PlayerActivity extends AppCompatActivity {
     public void playGame (View view) {
         ArrayList<String> playerList = db.getAllPlayers();
         int count = playerList.size();
-        if (count > 0 ) {
+        if (count > 1 ) {
             Intent intent = new Intent(this, GameActivity.class);
             startActivity(intent);
         }
         else {
-            Toast.makeText(getApplicationContext(), "Norėdami žaisti pridėkite nors vieną žaidėją!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Deja, bet šį žaidimą gali žaisti ne mažiau negu 2 žaidėjai!", Toast.LENGTH_LONG).show();
         }
     }
 
