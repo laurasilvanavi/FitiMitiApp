@@ -41,6 +41,7 @@ public class SportActivity extends AppCompatActivity implements SensorEventListe
     int between;
     int up;
     int squatToDo;
+    int drinkRandom;
 
     float work = 0.0f;
 
@@ -76,6 +77,8 @@ public class SportActivity extends AppCompatActivity implements SensorEventListe
         {
             squatToDo = 0;
         }
+        drinkRandom = intent.getIntExtra(GameActivity.DRINK_RANDOM, 0);
+        drinkRandom++;
 
         btn = (Button)findViewById(R.id.buttonSport);
         infoButton = (Button)findViewById(R.id.prepar);
@@ -107,6 +110,7 @@ public class SportActivity extends AppCompatActivity implements SensorEventListe
     public void continGame(View view){
         btn.setVisibility(View.INVISIBLE);
         Intent intent = new Intent(this, GameActivity.class);
+        intent.putExtra(GameActivity.DRINK_RANDOM, drinkRandom);
         startActivity(intent);
         finish();
     }

@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.laurute.fitimitiapp.Database.GameDbHelper;
 import com.example.laurute.fitimitiapp.Fragments.CrunchesTaskFragment;
@@ -26,6 +27,7 @@ import java.util.Random;
 
 public class GameActivity extends AppCompatActivity implements WhatFragment.WhatListener, WhoFragment.WhoListener {
     public final static String EXTRA_MESSAGE = "com.example.laurute.fitimitiapp.MESSAGE";
+    public final static String DRINK_RANDOM = "DRINK_RANDOM";
     private static final String TYPE0 = "task0";
     private static final String TYPE1 = "task1";
     private static final String TYPE2 = "task2";
@@ -35,9 +37,12 @@ public class GameActivity extends AppCompatActivity implements WhatFragment.What
     private String companion = "";
     private int randomPlayer = -1;
     private int randomCompanion = -1;
+    public int drinkRandom;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Toast.makeText(getApplicationContext(), "OnCreate", Toast.LENGTH_LONG).show();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
@@ -54,12 +59,22 @@ public class GameActivity extends AppCompatActivity implements WhatFragment.What
         android.app.FragmentManager fragmentManager = getFragmentManager();
         final android.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-        WhoFragment newFragment = new WhoFragment();
-        fragmentTransaction.add(R.id.fragment_container1, newFragment);
+        Intent intent = getIntent();
+        drinkRandom = intent.getIntExtra(GameActivity.DRINK_RANDOM, 0); // jei nk neduos, tai 0 liks
 
-        WhatFragment newFragment2 = new WhatFragment();
-        fragmentTransaction.add(R.id.fragment_container2, newFragment2);
-        fragmentTransaction.commit();
+        if(drinkRandom>2){
+            //drinkRandom=0;
+            Intent intent2 = new Intent(GameActivity.this, DrinkRandomActivity.class);
+            startActivity(intent2);
+        }
+        else{
+            WhoFragment newFragment = new WhoFragment();
+            fragmentTransaction.add(R.id.fragment_container1, newFragment);
+
+            WhatFragment newFragment2 = new WhatFragment();
+            fragmentTransaction.add(R.id.fragment_container2, newFragment2);
+            fragmentTransaction.commit();
+        }
     }
     GameDbHelper db;
 
@@ -73,31 +88,40 @@ public class GameActivity extends AppCompatActivity implements WhatFragment.What
         if (task.is_partner()) findCompanion();
         Bundle info = new Bundle();
         info.putString("TaskDescription", task.get_description());
-        switch (task.get_type()){
-            case TYPE1:
-                PhotoTaskFragment photoTaskFragment = new PhotoTaskFragment();
-                photoTaskFragment.setArguments(info);
-                fragmentTransaction.replace(R.id.fragment_container2, photoTaskFragment);
-                fragmentTransaction.commit();
-                break;
-            case TYPE2:
-                SportTaskFragment sportTaskFragment = new SportTaskFragment();
-                sportTaskFragment.setArguments(info);
-                fragmentTransaction.replace(R.id.fragment_container2, sportTaskFragment);
-                fragmentTransaction.commit();
-                break;
-            case TYPE3:
-                CrunchesTaskFragment crunchesTaskFragment = new CrunchesTaskFragment();
-                crunchesTaskFragment.setArguments(info);
-                fragmentTransaction.replace(R.id.fragment_container2, crunchesTaskFragment);
-                fragmentTransaction.commit();
-                break;
-            default:
-                SimpleTaskFragment simpleTaskFragment = new SimpleTaskFragment();
-                simpleTaskFragment.setArguments(info);
-                fragmentTransaction.replace(R.id.fragment_container2, simpleTaskFragment);
-                fragmentTransaction.commit();
+
+//        if(drinkRandom > 2){
+//            drinkRandom=0;
+//            Intent intent = new Intent(GameActivity.this, DrinkRandomActivity.class);
+//            startActivity(intent);
+//        }
+//        else{
+            switch (task.get_type()){
+                case TYPE1:
+                    PhotoTaskFragment photoTaskFragment = new PhotoTaskFragment();
+                    photoTaskFragment.setArguments(info);
+                    fragmentTransaction.replace(R.id.fragment_container2, photoTaskFragment);
+                    fragmentTransaction.commit();
+                    break;
+                case TYPE2:
+                    SportTaskFragment sportTaskFragment = new SportTaskFragment();
+                    sportTaskFragment.setArguments(info);
+                    fragmentTransaction.replace(R.id.fragment_container2, sportTaskFragment);
+                    fragmentTransaction.commit();
+                    break;
+                case TYPE3:
+                    CrunchesTaskFragment crunchesTaskFragment = new CrunchesTaskFragment();
+                    crunchesTaskFragment.setArguments(info);
+                    fragmentTransaction.replace(R.id.fragment_container2, crunchesTaskFragment);
+                    fragmentTransaction.commit();
+                    break;
+                default:
+                    SimpleTaskFragment simpleTaskFragment = new SimpleTaskFragment();
+                    simpleTaskFragment.setArguments(info);
+                    fragmentTransaction.replace(R.id.fragment_container2, simpleTaskFragment);
+                    fragmentTransaction.commit();
+//            }
         }
+
     }
 
     @Override
@@ -188,6 +212,7 @@ public class GameActivity extends AppCompatActivity implements WhatFragment.What
 
     public void chooseDrink(View view){
         Intent intent = new Intent(GameActivity.this, DrinkActivity.class);
+        intent.putExtra(DRINK_RANDOM, drinkRandom);
         startActivity(intent);
     }
 
@@ -196,6 +221,7 @@ public class GameActivity extends AppCompatActivity implements WhatFragment.What
         str = str.replaceAll("\\D+","");
         Intent intent = new Intent(this, PictureActivity.class);
         intent.putExtra(EXTRA_MESSAGE, str);
+        intent.putExtra(DRINK_RANDOM, drinkRandom);
         startActivity(intent);
     }
 
@@ -216,6 +242,7 @@ public class GameActivity extends AppCompatActivity implements WhatFragment.What
     }
 
     public void simpleTaskDone(View view){
+        drinkRandom++;
         android.app.FragmentManager fragmentManager = getFragmentManager();
         final android.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
@@ -231,4 +258,18 @@ public class GameActivity extends AppCompatActivity implements WhatFragment.What
         fragmentTransaction.replace(R.id.fragment_container2, newFragment2);
         fragmentTransaction.commit();
     }
+//    @Override
+//    public void onStart(){
+//        super.onStart();
+//        Toast.makeText(getApplicationContext(), "OnStarte", Toast.LENGTH_LONG).show();
+//
+//    }
+//
+//    @Override
+//    public void onResume(){
+//        super.onResume();
+//        Toast.makeText(getApplicationContext(), "OnResumėje", Toast.LENGTH_LONG).show();
+//
+//    }
+
 }

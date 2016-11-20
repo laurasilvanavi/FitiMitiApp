@@ -38,6 +38,7 @@ public class PictureActivity extends AppCompatActivity {
     Uri photoURI;
     ImageView imageView;
     int peopleCount;
+    int drinkRandom;
     Button buttonInformation;
 
     @Override
@@ -47,12 +48,14 @@ public class PictureActivity extends AppCompatActivity {
         imageView =(ImageView) findViewById(R.id.imageViewPhoto);
         Intent intent = getIntent();
         String message = intent.getStringExtra(GameActivity.EXTRA_MESSAGE);
+        drinkRandom = intent.getIntExtra(GameActivity.DRINK_RANDOM, 0);
+        drinkRandom++;
         buttonInformation = (Button) findViewById(R.id.buttonInformation);
 
         try
         {
-            int number = Integer.parseInt(message);
-            peopleCount = number;
+            peopleCount = Integer.parseInt(message);
+
         }
         catch (NumberFormatException e)
         {
@@ -116,6 +119,7 @@ public class PictureActivity extends AppCompatActivity {
                 int facesCount = detectFaces();
                 if (facesCount>peopleCount){
                     Intent intent = new Intent(PictureActivity.this, GameActivity.class);
+                    intent.putExtra(GameActivity.DRINK_RANDOM, drinkRandom);
                     startActivity(intent);
                     finish();
                 }

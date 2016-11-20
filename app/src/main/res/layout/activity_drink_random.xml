@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_drink_random"
     android:layout_width="match_parent"
@@ -9,5 +10,31 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.laurute.fitimitiapp.DrinkRandomActivity">
+
+    <Button
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Kiekvienas turi išgerti kaimyno gėrimo 3 gurkšnius"
+        android:id="@+id/buttonDrinkRandomTask"
+        android:textColor="@color/primary_dark_material_light2"
+        android:background="@color/wallet_bright_foreground_holo_dark"
+        android:textSize="20sp"
+        android:paddingTop="30dp"
+        android:paddingBottom="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="142dp" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/checked"
+        android:id="@+id/buttonDrinkRandomDone"
+        android:layout_marginTop="84dp"
+        android:elevation="0dp"
+        android:onClick="doneDrinkRandom"
+        android:layout_below="@+id/buttonDrinkRandomTask"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

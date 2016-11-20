@@ -28,6 +28,8 @@ public class CrunchesActivity extends AppCompatActivity implements SensorEventLi
     int crunchesToDo;
     float count = 0;
 
+    int drinkRandom;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +46,8 @@ public class CrunchesActivity extends AppCompatActivity implements SensorEventLi
         {
             crunchesToDo = 0;
         }
+        drinkRandom = intent.getIntExtra(GameActivity.DRINK_RANDOM, 0);
+        drinkRandom++;
 
         startButton = (Button)findViewById(R.id.buttonCrunch);
         startButton.setVisibility(View.INVISIBLE);
@@ -60,6 +64,7 @@ public class CrunchesActivity extends AppCompatActivity implements SensorEventLi
         unregister();
         startButton.setVisibility(View.INVISIBLE);
         Intent intent = new Intent(this, GameActivity.class);
+        intent.putExtra(GameActivity.DRINK_RANDOM, drinkRandom);
         startActivity(intent);
         finish();
     }
