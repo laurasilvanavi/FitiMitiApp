@@ -39,7 +39,8 @@
         <activity android:name=".DrinkActivity" />
         <activity android:name=".SportActivity" />
         <activity android:name=".CrunchesActivity" />
-        <activity android:name=".TaskActivity"></activity>
+        <activity android:name=".TaskActivity" />
+        <activity android:name=".DrinkRandomActivity"></activity>
     </application>
 
 </manifest>

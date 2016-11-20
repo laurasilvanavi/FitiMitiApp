@@ -88,7 +88,7 @@ public class CrunchesActivity extends AppCompatActivity implements SensorEventLi
     }
 
     public void countRepeat(float sensorX, float sensorY, float sensorZ) {
-            if (sensorY > 1.6 || sensorY < -1.6) {
+            if (sensorX > 3.5 || sensorX < -3.5) {
                 sm.unregisterListener(this);
                 count += 0.5f;
                 final Handler handler = new Handler();

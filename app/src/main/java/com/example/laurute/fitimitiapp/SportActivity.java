@@ -45,7 +45,7 @@ public class SportActivity extends AppCompatActivity implements SensorEventListe
     float work = 0.0f;
 
     TextView texto;
-    Button btn;
+    Button btn, infoButton;
 
     // private int TOTAL = 0;
     // private int SQUAT_TIME = 0;
@@ -78,6 +78,7 @@ public class SportActivity extends AppCompatActivity implements SensorEventListe
         }
 
         btn = (Button)findViewById(R.id.buttonSport);
+        infoButton = (Button)findViewById(R.id.prepar);
 
         mInitialized = false;
         counter = 0;
@@ -175,6 +176,12 @@ public class SportActivity extends AppCompatActivity implements SensorEventListe
                 }
 
                 startTime = now;
+            } else {
+                texto.setText("");
+                infoButton.setText("Atsiprašome, bet Jūsų įrenginys neturi reikiamo sensoriaus");
+                infoButton.setTextColor(rgb(255, 102, 102));
+                //Toast.makeText(getApplicationContext(), "Atsiprašome, bet Jūsų įrenginys neturi reikiamo sensoriaus", Toast.LENGTH_LONG).show();
+                btn.setVisibility(View.VISIBLE);
             }
         } else {
             btn.setVisibility(View.VISIBLE);
