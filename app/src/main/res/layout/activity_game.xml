@@ -40,9 +40,8 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:id="@+id/fragment_container2"
-            android:background="#00cc66"
-            android:gravity="center"
-            ></LinearLayout>
+            android:background="#248c5c"
+            android:gravity="center"></LinearLayout>
 
     </LinearLayout>
 </RelativeLayout>
