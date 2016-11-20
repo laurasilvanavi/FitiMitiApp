@@ -220,13 +220,12 @@ public class GameDbHelper extends SQLiteOpenHelper {
     }
 
     public void generateAllDefaultTasks() {
-        addTask("Pakakoti po pakopa", "task0", false);
         addTask("Padainuoti visu balsu 1 min bet kokią dainą", "task0", false);
         addTask("Išriaugėti abėcėlę", "task0", false);
         addTask("Pašokti pagal mėgstamiausią dainą", "task0", false);
         addTask("Apeiti aplink namą 3 kartus", "task0", false);
         addTask("Padaryti 10 pritūpimų", "task2", false);
-        addTask("Nusifotografuoti su 2 blondinėmis", "task1", false);
+        addTask("Nusifotgrafuoti su 2 blondinėmis", "task1", false);
         addTask("Nusifotografuoti su šuniu", "task1", false);
         addTask("Nusifotografuoti su 2 mamomis", "task1", false);
         addTask("Nusifotografuoti su 5 geriausiais draugais", "task1", false);
