@@ -1,7 +1,11 @@
 package com.example.laurute.fitimitiapp;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -35,6 +39,14 @@ public class DeleteTaskActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_delete_task);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarDeleteTask);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        toolbar.setAlpha(0.5f);
+        toolbar.setBackground(new ColorDrawable(Color.TRANSPARENT));
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         db = new GameDbHelper(this);
         lv = (ListView)findViewById(R.id.tasklist);
         tv = (TextView)findViewById(R.id.title);
@@ -58,6 +70,20 @@ public class DeleteTaskActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                //Intent intent = new Intent(this, GameActivity.class);
+                //startActivity(intent);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
     public void deleteTask(View v) {
         for (int i = 0; i < adapterT.getCount(); i++) {
             taskCheck.add(adapterT.getIfChecked(i));
@@ -75,5 +101,15 @@ public class DeleteTaskActivity extends AppCompatActivity {
                 i--;
             }
         }
+        adapterT = new ArrayAdapterTask(this, R.layout.task_info,tasksDescriptions);
+        lv.setAdapter(adapterT);
+        taskCheck.clear();
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+        // Intent intent = new Intent(this, GameActivity.class);
+        // startActivity(intent);
     }
 }
