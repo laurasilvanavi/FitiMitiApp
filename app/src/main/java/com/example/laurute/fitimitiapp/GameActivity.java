@@ -38,7 +38,7 @@ public class GameActivity extends AppCompatActivity implements WhatFragment.What
     private int randomPlayer = -1;
     private int randomCompanion = -1;
     public int drinkRandom;
-    public int taskCount = 0;
+    //public int taskCount = 0;
 
 
     @Override
@@ -83,10 +83,12 @@ public class GameActivity extends AppCompatActivity implements WhatFragment.What
         android.app.FragmentManager fragmentManager = getFragmentManager();
         android.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         db = new GameDbHelper(this);
-        taskCount = db.getTaskCount();
-
-        int random = getRandom(db.getTaskCount(), 1);
-        task = db.getTask(random);
+        int random = getRandom(db.getAllTasks().size()-1, 0);
+        task = db.getTask(db.getAllTasks().get(random).getID());
+//        taskCount = db.getTaskCount();
+//
+//        int random = getRandom(db.getTaskCount(), 1);
+//        task = db.getTask(random);
         if (task.is_partner()) findCompanion();
         Bundle info = new Bundle();
         info.putString("TaskDescription", task.get_description());
