@@ -34,14 +34,18 @@
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".GameActivity"
-            android:noHistory="true"
+            android:noHistory="false"
             android:screenOrientation="portrait" />
-        <activity android:name=".DrinkActivity" />
-        <activity android:name=".SportActivity" />
-        <activity android:name=".CrunchesActivity" />
-        <activity android:name=".TaskActivity" />
-        <activity android:name=".DrinkRandomActivity" />
-        <activity android:name=".DeleteTaskActivity"></activity>
+        <activity android:name=".DrinkActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".SportActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".CrunchesActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".TaskActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".DrinkRandomActivity"
+            android:screenOrientation="portrait" ></activity>
     </application>
 
 </manifest>

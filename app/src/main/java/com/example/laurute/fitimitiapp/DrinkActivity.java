@@ -25,6 +25,8 @@ public class DrinkActivity extends AppCompatActivity implements SensorEventListe
     private int mark;
     Button btn;
 
+    int drinkRandom;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +38,10 @@ public class DrinkActivity extends AppCompatActivity implements SensorEventListe
         senManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         accelerometer = senManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         senManager.registerListener(this, accelerometer , SensorManager.SENSOR_DELAY_NORMAL);
+
+        Intent intent = getIntent();
+        drinkRandom = intent.getIntExtra(GameActivity.DRINK_RANDOM, 0);
+        drinkRandom++;
     }
 
     private void getRandomNumber() {
@@ -49,6 +55,7 @@ public class DrinkActivity extends AppCompatActivity implements SensorEventListe
     public void continueGame(View view){
         btn.setVisibility(View.INVISIBLE);
         Intent intent = new Intent(this, GameActivity.class);
+        intent.putExtra(GameActivity.DRINK_RANDOM, drinkRandom);
         startActivity(intent);
         finish();
     }
