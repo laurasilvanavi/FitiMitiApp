@@ -224,6 +224,7 @@ public class GameDbHelper extends SQLiteOpenHelper {
         String selection = GameContract.Task._ID + " LIKE ?";
         String[] selectionArgs = { String.valueOf(id) };
         db.delete(GameContract.Task.TABLE_NAME, selection, selectionArgs);
+        db.close();
     }
 
     public void deleteAllPlayers() {

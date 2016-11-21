@@ -104,6 +104,7 @@ public class DeleteTaskActivity extends AppCompatActivity {
         adapterT = new ArrayAdapterTask(this, R.layout.task_info,tasksDescriptions);
         lv.setAdapter(adapterT);
         taskCheck.clear();
+        db.close();
     }
 
     @Override
