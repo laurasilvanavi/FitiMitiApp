@@ -285,6 +285,7 @@ public class GameDbHelper extends SQLiteOpenHelper {
         addDrink("Geria besimokantys Vilniaus universitete");
         addDrink("Visi paragauja kaimyno iš dešinės gėrimo");
         addDrink("Geria visi");
+        addDrink("Visi sudainuoja Lietuvos himną");
         addDrink("Geria vienišiai");
         addDrink("Laikas išgerti kairiarankiams");
         addDrink("Jei tavo varde yra raidė S, reiškia turi išgerti");
