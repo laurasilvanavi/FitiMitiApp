@@ -42,7 +42,6 @@ public class GameActivity extends AppCompatActivity implements WhatFragment.What
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Toast.makeText(getApplicationContext(), "OnCreate", Toast.LENGTH_LONG).show();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
@@ -62,12 +61,12 @@ public class GameActivity extends AppCompatActivity implements WhatFragment.What
         Intent intent = getIntent();
         drinkRandom = intent.getIntExtra(GameActivity.DRINK_RANDOM, 0); // jei nk neduos, tai 0 liks
 
-        if(drinkRandom>2){
-            //drinkRandom=0;
-            Intent intent2 = new Intent(GameActivity.this, DrinkRandomActivity.class);
-            startActivity(intent2);
-        }
-        else{
+//        if(drinkRandom>2){
+//            //drinkRandom=0;
+//            Intent intent2 = new Intent(GameActivity.this, DrinkRandomActivity.class);
+//            startActivity(intent2);
+//        }
+//        else{
             WhoFragment newFragment = new WhoFragment();
             fragmentTransaction.add(R.id.fragment_container1, newFragment);
 
@@ -75,7 +74,7 @@ public class GameActivity extends AppCompatActivity implements WhatFragment.What
             fragmentTransaction.add(R.id.fragment_container2, newFragment2);
             fragmentTransaction.commit();
         }
-    }
+//    }
     GameDbHelper db;
 
     @Override
@@ -89,12 +88,12 @@ public class GameActivity extends AppCompatActivity implements WhatFragment.What
         Bundle info = new Bundle();
         info.putString("TaskDescription", task.get_description());
 
-//        if(drinkRandom > 2){
-//            drinkRandom=0;
-//            Intent intent = new Intent(GameActivity.this, DrinkRandomActivity.class);
-//            startActivity(intent);
-//        }
-//        else{
+        if(drinkRandom > 2){
+            drinkRandom=0;
+            Intent intent = new Intent(GameActivity.this, DrinkRandomActivity.class);
+            startActivity(intent);
+        }
+        else{
             switch (task.get_type()){
                 case TYPE1:
                     PhotoTaskFragment photoTaskFragment = new PhotoTaskFragment();
@@ -119,7 +118,7 @@ public class GameActivity extends AppCompatActivity implements WhatFragment.What
                     simpleTaskFragment.setArguments(info);
                     fragmentTransaction.replace(R.id.fragment_container2, simpleTaskFragment);
                     fragmentTransaction.commit();
-//            }
+            }
         }
 
     }
@@ -258,18 +257,11 @@ public class GameActivity extends AppCompatActivity implements WhatFragment.What
         fragmentTransaction.replace(R.id.fragment_container2, newFragment2);
         fragmentTransaction.commit();
     }
-//    @Override
-//    public void onStart(){
-//        super.onStart();
-//        Toast.makeText(getApplicationContext(), "OnStarte", Toast.LENGTH_LONG).show();
-//
-//    }
-//
-//    @Override
-//    public void onResume(){
-//        super.onResume();
-//        Toast.makeText(getApplicationContext(), "OnResumėje", Toast.LENGTH_LONG).show();
-//
-//    }
-
+    @Override
+    public void onStart(){
+        super.onStart();
+    }
+    @Override
+    public void onBackPressed() {
+    }
 }

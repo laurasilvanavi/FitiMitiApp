@@ -27,8 +27,9 @@ public class DrinkRandomActivity extends AppCompatActivity {
     }
 
     public void doneDrinkRandom(View view){
-        Intent intent = new Intent(this, GameActivity.class);
-        startActivity(intent);
+        this.finish();
+//        Intent intent = new Intent(this, GameActivity.class);
+//        startActivity(intent);
     }
 
     private int getRandom(int max, int min)
