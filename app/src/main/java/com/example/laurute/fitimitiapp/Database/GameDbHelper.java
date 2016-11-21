@@ -20,7 +20,7 @@ public class GameDbHelper extends SQLiteOpenHelper {
     // sukurimo sakiniai
     private static final String TEXT_TYPE = " TEXT";
     private static final String COMMA_SEP = ",";
-    private static int taskSize = 0;
+    private static final int taskSize = 14;
 
     private static final String SQL_CREATE_PLAYERS =
             "CREATE TABLE " + GameContract.Player.TABLE_NAME + " (" +
@@ -58,8 +58,6 @@ public class GameDbHelper extends SQLiteOpenHelper {
 
     public GameDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-        generateAllDefaultDrinks();
-        generateAllDefaultTasks();
     }
 
     public void onCreate(SQLiteDatabase db) {
@@ -167,6 +165,36 @@ public class GameDbHelper extends SQLiteOpenHelper {
         return drinks;
     }
 
+    public ArrayList<Task> getAllTasks() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + GameContract.Task.TABLE_NAME, null);
+        ArrayList<Task> tasks = new ArrayList<Task>();
+        String partner;
+        if (cursor.getCount() > 0) {
+            for (int i = 0; i < cursor.getCount(); i++) {
+                cursor.moveToNext();
+                Task t = new Task();
+                t.setID(Integer.parseInt(cursor.getString(0)));
+                t.set_description(cursor.getString(1));
+                t.set_type(cursor.getString(2));
+
+                partner = cursor.getString(3);
+                boolean isPartner;
+                if (Integer.parseInt(partner) == 1) {
+                    isPartner = true;
+                } else {
+                    isPartner = false;
+                }
+
+                t.set_partner(isPartner);
+                tasks.add(t);
+            }
+        }
+        cursor.close();
+        db.close();
+        return tasks;
+    }
+
     public ArrayList<String> getAllPlayers() {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + GameContract.Player.TABLE_NAME, null);
@@ -189,6 +217,13 @@ public class GameDbHelper extends SQLiteOpenHelper {
         String selection = GameContract.Player.COLUMN_NAME_NAME + " LIKE ?";
         String[] selectionArgs = { name };
         db.delete(GameContract.Player.TABLE_NAME, selection, selectionArgs);
+    }
+
+    public void deleteTask(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String selection = GameContract.Task._ID + " LIKE ?";
+        String[] selectionArgs = { String.valueOf(id) };
+        db.delete(GameContract.Task.TABLE_NAME, selection, selectionArgs);
     }
 
     public void deleteAllPlayers() {
@@ -241,7 +276,6 @@ public class GameDbHelper extends SQLiteOpenHelper {
         addTask("Atlikti 20 atsilenkimų", "task3", false);
         addTask("Padaryti 10 atsilenkimų", "task3", false);
         addTask("Padaryti 15 atsilenkimų", "task3", false);
-        taskSize = getTaskCount();
     }
 
     public void generateAllDefaultDrinks() {

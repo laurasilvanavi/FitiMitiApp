@@ -43,10 +43,10 @@ public class PlayerActivity extends AppCompatActivity {
         db = new GameDbHelper(this);
 
         //------kai nera duomenu TASK ir DRINK lentelese, tai iraso defaultinius
-        /*countTask = db.getTaskCount();
+        countTask = db.getTaskCount();
         countDrink = db.getDrinkCount();
         if (countTask == 0) db.generateAllDefaultTasks();
-        if (countDrink == 0) db.generateAllDefaultDrinks();*/
+        if (countDrink == 0) db.generateAllDefaultDrinks();
 
 
         //lv = (ListView) findViewById(R.id.playerlist);
