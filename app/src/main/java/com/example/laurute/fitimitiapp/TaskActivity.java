@@ -39,8 +39,8 @@ public class TaskActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
-                Intent intent = new Intent(this, GameActivity.class);
-                startActivity(intent);
+                //Intent intent = new Intent(this, GameActivity.class);
+                //startActivity(intent);
                 return true;
 
             default:
