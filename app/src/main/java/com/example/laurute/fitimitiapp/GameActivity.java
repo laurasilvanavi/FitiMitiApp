@@ -161,9 +161,12 @@ public class GameActivity extends AppCompatActivity implements WhatFragment.What
                 finish();
                 return true;
 
-            case R.id.action_task:
+            case R.id.action_addTask:
                 Intent intent = new Intent(GameActivity.this, TaskActivity.class);
                 startActivity(intent);
+                return true;
+
+            case R.id.action_deleteTask:
                 return true;
 
             case R.id.action_finish:

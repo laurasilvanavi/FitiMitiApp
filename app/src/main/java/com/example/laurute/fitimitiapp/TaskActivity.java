@@ -70,4 +70,11 @@ public class TaskActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        finish();
+        Intent intent = new Intent(this, GameActivity.class);
+        startActivity(intent);
+    }
+
 }

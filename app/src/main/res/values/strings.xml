@@ -4,6 +4,7 @@
     <string name="sport">Atsistokite, laikykite telefoną vertikaliai ir jei esate pasiruošę, pradėkite!</string>
     <string name="crunch">Atsigulkite, laikykite telefoną vertikaliai ir jei esate pasiruošę, pradėkite!</string>
     <string name="action_player">Žaidėjai</string>
-    <string name="action_task">Pridėti užduotį</string>
+    <string name="action_addTask">Pridėti užduotį</string>
+    <string name="action_deleteTask">Ištrinti užduotį</string>
     <string name="action_finish">Baigti žaidimą</string>
 </resources>

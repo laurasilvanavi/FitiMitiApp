@@ -9,8 +9,10 @@
         <menu>
             <item android:id="@+id/action_player"
                 android:title="@string/action_player" />
-            <item android:id="@+id/action_task"
-                android:title="@string/action_task" />
+            <item android:id="@+id/action_addTask"
+                android:title="@string/action_addTask" />
+            <item android:id="@+id/action_deleteTask"
+                android:title="@string/action_deleteTask" />
             <item android:id="@+id/action_finish"
                 android:title="@string/action_finish" />
         </menu>

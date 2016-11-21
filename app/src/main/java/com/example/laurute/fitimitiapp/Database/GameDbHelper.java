@@ -20,6 +20,7 @@ public class GameDbHelper extends SQLiteOpenHelper {
     // sukurimo sakiniai
     private static final String TEXT_TYPE = " TEXT";
     private static final String COMMA_SEP = ",";
+    private static int taskSize = 0;
 
     private static final String SQL_CREATE_PLAYERS =
             "CREATE TABLE " + GameContract.Player.TABLE_NAME + " (" +
@@ -47,6 +48,9 @@ public class GameDbHelper extends SQLiteOpenHelper {
     private static final String SQL_DELETE_DRINKS =
             "DROP TABLE IF EXISTS " + GameContract.Drink.TABLE_NAME;
 
+    public static int getTaskSize() {
+        return taskSize;
+    }
 
     // If you change the database schema, you must increment the database version.
     public static final int DATABASE_VERSION = 1;
@@ -54,7 +58,10 @@ public class GameDbHelper extends SQLiteOpenHelper {
 
     public GameDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        generateAllDefaultDrinks();
+        generateAllDefaultTasks();
     }
+
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(SQL_CREATE_PLAYERS);
         db.execSQL(SQL_CREATE_TASKS);
@@ -224,16 +231,17 @@ public class GameDbHelper extends SQLiteOpenHelper {
         addTask("Išriaugėti abėcėlę", "task0", false);
         addTask("Pašokti pagal mėgstamiausią dainą", "task0", false);
         addTask("Apeiti aplink namą 3 kartus", "task0", false);
-        addTask("Padaryti 10 pritūpimų", "task2", false);
         addTask("Nusifotgrafuoti su 2 blondinėmis", "task1", false);
         addTask("Nusifotografuoti su šuniu", "task1", false);
         addTask("Nusifotografuoti su 2 mamomis", "task1", false);
         addTask("Nusifotografuoti su 5 geriausiais draugais", "task1", false);
+        addTask("Padaryti 10 pritūpimų", "task2", false);
         addTask("Padaryti 20 plačių pritūpimų", "task2", false);
         addTask("Padaryti 15 slidininko pritūpimų", "task2", false);
         addTask("Atlikti 20 atsilenkimų", "task3", false);
         addTask("Padaryti 10 atsilenkimų", "task3", false);
         addTask("Padaryti 15 atsilenkimų", "task3", false);
+        taskSize = getTaskCount();
     }
 
     public void generateAllDefaultDrinks() {

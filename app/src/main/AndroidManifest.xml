@@ -40,7 +40,8 @@
         <activity android:name=".SportActivity" />
         <activity android:name=".CrunchesActivity" />
         <activity android:name=".TaskActivity" />
-        <activity android:name=".DrinkRandomActivity"></activity>
+        <activity android:name=".DrinkRandomActivity" />
+        <activity android:name=".DeleteTaskActivity"></activity>
     </application>
 
 </manifest>

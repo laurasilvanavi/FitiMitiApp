@@ -43,29 +43,14 @@ public class PlayerActivity extends AppCompatActivity {
         db = new GameDbHelper(this);
 
         //------kai nera duomenu TASK ir DRINK lentelese, tai iraso defaultinius
-        countTask = db.getTaskCount();
+        /*countTask = db.getTaskCount();
         countDrink = db.getDrinkCount();
         if (countTask == 0) db.generateAllDefaultTasks();
-        if (countDrink == 0) db.generateAllDefaultDrinks();
+        if (countDrink == 0) db.generateAllDefaultDrinks();*/
 
 
         //lv = (ListView) findViewById(R.id.playerlist);
         gv = (GridView) findViewById(R.id.gridview);
-
-
-        //--------------BANDYMAI------
-
-       /* db.addTask("Nusifotografuoti su 2 mamomis", "task1", false);
-        db.addTask("Nusifotografuoti su 3 geriausiais draugais", "task1", false);
-
-       /* db.addTask("Pakakoti po pakopa", "task0", false);
-        db.addTask("Padainuoti visu balsu 1 min bet kokią dainą", "task0", false);
-        db.addTask("Išriaugėti abėcėlę", "task0", false);
-        db.addTask("Pašokti", "task0", false);
-        db.addTask("Apeiti aplink namą 3 kartus", "task0", false);
-        db.addTask("Padaryti 10 pritūpimų", "task2", false);
-        db.addTask("Nusifotografuoti su 2 blondinėmis", "task1", false);*/
-
 
         //----------------------------
 

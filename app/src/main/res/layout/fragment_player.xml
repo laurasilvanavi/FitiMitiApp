@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/textViewPlayer"
         android:textColor="@color/game_text_color_after"
-        android:textSize="60sp" />
+        android:textSize="56sp" />
 
     <TextView
         android:gravity="bottom"
