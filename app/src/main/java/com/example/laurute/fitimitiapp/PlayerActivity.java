@@ -7,8 +7,13 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -48,6 +53,13 @@ public class PlayerActivity extends AppCompatActivity {
         if (countTask == 0) db.generateAllDefaultTasks();
         if (countDrink == 0) db.generateAllDefaultDrinks();
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarPlayer);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        toolbar.setAlpha(0.5f);
+        toolbar.setBackground(new ColorDrawable(Color.TRANSPARENT));
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
 
         //lv = (ListView) findViewById(R.id.playerlist);
         gv = (GridView) findViewById(R.id.gridview);
@@ -76,6 +88,41 @@ public class PlayerActivity extends AppCompatActivity {
             }
         });
        // this.deleteDatabase("Game.db");
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.action_second, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_second:
+                return true;
+
+            case R.id.action_addTask:
+                Intent intent = new Intent(this, TaskActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.action_deleteTask:
+                Intent intentT = new Intent(this, DeleteTaskActivity.class);
+                startActivity(intentT);
+                return true;
+
+            case R.id.action_finish:
+                this.finishAffinity();
+                Intent homeIntent = new Intent(Intent.ACTION_MAIN);
+                homeIntent.addCategory(Intent.CATEGORY_HOME);
+                homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(homeIntent);
+
+            default:
+                return super.onOptionsItemSelected(item);
+
+        }
     }
 
     public void playGame (View view) {

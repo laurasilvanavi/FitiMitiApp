@@ -29,7 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:id="@+id/fragment_container1"
-            android:background="#FFDB58"
+            android:background="#fff03c"
             android:gravity="center"
             ></LinearLayout>
 
@@ -40,7 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:id="@+id/fragment_container2"
-            android:background="#00cc66"
+            android:background="#09d74b"
             android:gravity="center"></LinearLayout>
 
     </LinearLayout>

@@ -1,77 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_game"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     android:fitsSystemWindows="false"
     android:descendantFocusability="beforeDescendants"
-    android:focusableInTouchMode="true" ><![CDATA[
-    tools:context="com.example.laurute.fitimitiapp.PlayerActivity">
+    android:focusableInTouchMode="true">
 
-
-    ]]><!--<ListView android:id="@+id/playerlist"
-        android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
-        android:layout_marginTop="15dp"
-        android:layout_below="@+id/playbutton"
-        android:layout_alignParentStart="true" />-->
-
-    <GridView
-        android:id="@+id/gridview"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbarPlayer"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:columnWidth="135dp"
-        android:numColumns="auto_fit"
-        android:verticalSpacing="10dp"
-        android:stretchMode="columnWidth"
-        android:gravity="center"
-        android:layout_below="@+id/button"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="20dp"
-        android:layout_alignParentStart="true"
-        android:layout_above="@+id/playbutton" />
+        android:layout_height="?attr/actionBarSize"
+        android:elevation="4dp"
+        android:gravity="top|start"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/playername"
-        android:maxLength="11"
-        android:inputType="textCapSentences"
-        android:hint="Įveskite žaidėjo vardą"
-        tools:layout_width="match_parent"
-        android:layout_marginTop="12dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_toStartOf="@+id/button" />
-
-    <ImageButton
-        android:id="@+id/button"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:src="@drawable/add_player"
-        android:onClick="addPlayer"
-        android:background="@null"
-        android:layout_alignTop="@+id/playername"
-        android:layout_alignParentEnd="true"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp" />
-
-    <Button
-        android:text="Žaisti"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/playbutton"
-        android:onClick="playGame"
-        android:background="@drawable/button_style"
-        android:textColor="#ffffff"
-        android:textSize="@dimen/button_text_size"
-        android:layout_marginBottom="15dp"
-        android:layout_centerInParent="false"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:layout_below="@id/toolbarPlayer">
+
+        <GridView
+            android:id="@+id/gridview"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:columnWidth="135dp"
+            android:numColumns="auto_fit"
+            android:verticalSpacing="10dp"
+            android:stretchMode="columnWidth"
+            android:gravity="center"
+            android:layout_below="@+id/button"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="20dp"
+            android:layout_alignParentStart="true"
+            android:layout_above="@+id/playbutton" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/playername"
+            android:maxLength="11"
+            android:inputType="textCapSentences"
+            android:hint="Įveskite žaidėjo vardą"
+            tools:layout_width="match_parent"
+            android:layout_marginTop="12dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_toStartOf="@+id/button" />
+
+        <ImageButton
+            android:id="@+id/button"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/add_player"
+            android:onClick="addPlayer"
+            android:background="@null"
+            android:layout_alignTop="@+id/playername"
+            android:layout_alignParentEnd="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp" />
+
+        <Button
+            android:text="Žaisti"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/playbutton"
+            android:onClick="playGame"
+            android:background="@drawable/button_style"
+            android:textColor="#ffffff"
+            android:textSize="@dimen/button_text_size"
+            android:layout_marginBottom="15dp"
+            android:layout_centerInParent="false"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
 </RelativeLayout>
